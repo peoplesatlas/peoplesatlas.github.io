@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+	<head>
+	<script src="http://code.jquery.com/jquery-1.8.1.min.js"></script>
+		<script type="text/javascript" src="http://scalar.usc.edu/works/system/application/views/widgets/api/scalarapi.js"></script>
+		<script type="text/javascript">
+			$( document ).ready( function() {
+				scalarapi.setBook( "http://scalar.usc.edu/works/peoples-nuclear_atlas/" );
+				if ( scalarapi.loadNode( "index", true, handleSuccess, handleFailure, 1 ) == "loaded" ) {
+					handleSuccess();
+				};
+
+				function handleSuccess() {
+
+          // you can change the get Node to be the page that you want to get or the "node"
+					var node = scalarapi.getNode( "index" );
+
+          console.log(node);
+					$( "body" ).append( "<p>Hello world, this page is called <b>" + node.getDisplayTitle() + "</b>.</p>" );
+
+					var pathContents = node.getRelatedNodes( "path", "outgoing" );
+					$( "body" ).append( "<p>It is a path containing " + pathContents.length + " items.</p>" );
+				}
+
+				function handleFailure() {
+					$( "body" ).append( "<p>The node could not be loaded.</p>" );
+        }
+
+			});
+		</script>
+	</head>
+	<body>
+	</body>
+</html>
+
+<!--WE ARE GOING TO BUILD THIS IN REACT!-->
+<!--    :D    ---->
